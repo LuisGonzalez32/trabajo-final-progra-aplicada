@@ -1,0 +1,17 @@
+<link rel="stylesheet" href="/static/style.css">
+<p> </p>
+<div>
+    <br>
+    <form id="form">
+        <label id="myLabel" for="login">Log in</label>
+        <input type="radio" name="loginMenu" id="login" value="logIn" checked><br>
+        <label id="myLabel" for="signin">Create account</label>
+        <input type="radio" name="loginMenu" id="signin" value="createAccount"><br>
+    </form><br><br>
+
+    <button onClick="loginMenu()">send</button>
+    <br><br>
+
+    <script src="{{url_for('static', filename='script.js')}}"></script>
+
+</div>

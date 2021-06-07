@@ -1,0 +1,322 @@
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial;
+  padding: 10px;
+  background: #fdf9f9;
+}
+
+/* Header/Blog Title */
+.header {
+  padding: 30px;
+  text-align: center;
+  background: white;
+  color: #070707;
+  font-family: fantasy;
+}
+
+.header h1 {
+  font-size: 50px;
+  color:rgb(252, 228, 223); 
+}
+
+/* Style the top navigation bar */
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+/* Style the topnav links */
+.topnav a {
+  float: left;
+  display: block;
+  color: #fde2e2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change color on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+
+/* Create two unequal columns that floats next to each other */
+/* Left column */
+.leftcolumn {   
+  float: left;
+  width: 75%;
+}
+
+/* Right column */
+.rightcolumn {
+  float: left;
+  width: 25%;
+  background-color: #4134f3;
+  padding-left: 20px;
+}
+
+
+
+/* Add a card effect for articles */
+.card {
+  background-color: rgb(177, 140, 84);
+  padding: 20px;
+  margin-top: 20px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Footer */
+.footer {
+  padding: 20px;
+  text-align: center;
+  background: rgb(39, 36, 36);
+  margin-top: 20px;
+}
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 800px) {
+  .leftcolumn, .rightcolumn {   
+    width: 100%;
+    padding: 0;
+  }
+}
+
+/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+@media screen and (max-width: 400px) {
+  .topnav a {
+    float: none;
+    width: 100%;
+  }
+}
+
+
+
+
+
+
+.myTable {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  min-width: 400px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.myTable thead tr {
+  background-color: #009879;
+  color: #ffffff;
+  text-align: left;
+}
+
+
+.myTable th,
+.myTable td {
+  padding: 12px 15px;
+}
+
+
+
+.myTable tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.myTable tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.myTable tbody tr:last-of-type {
+  border-bottom: 2px solid #009879;
+}
+
+
+
+
+
+.myTable tbody tr.active-row {
+  font-weight: bold;
+  color: #009879;
+}
+
+
+
+
+
+
+
+.social-menu ul {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+div.social-menu {
+  position: absolute; /* cuando ponemos esto le podemos hacer todo lo que queramos con BOTTOM, LEFT, RIGHT, UP*/
+  bottom: -212%;
+  right: 50%;
+  
+}
+.social-menu ul li {
+  list-style: none;
+  margin: 0 10px;
+}
+.social-menu ul li .fa {
+  color: #000000;
+  font-size: 25px;
+  line-height: 50px;
+  transition: .5s;
+}
+.social-menu ul li .fa:hover {
+  color: #e7abab;
+}
+.social-menu ul li a {
+  position: relative;
+  display: block;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: white;
+  text-align: center;
+  transition: 0.5s;
+  transform: translate(0,0px);
+  box-shadow: 0px 7px 5px rgba(0, 0, 0, 0.5);
+}
+.social-menu ul li a:hover {
+  transform: rotate(0deg) skew(0deg) translate(0, -10px);
+}
+.social-menu ul li:nth-child(1) a:hover {
+  background-color: #3b5999;
+}
+.social-menu ul li:nth-child(2) a:hover {
+  background-color: #55acee;
+}
+.social-menu ul li:nth-child(3) a:hover {
+  background-color: #f80632;
+}
+.social-menu ul li:nth-child(4) a:hover {
+  background-color: #cd201f;
+}
+.social-menu ul li:nth-child(5) a:hover {
+  background-color: #0077B5;
+}
+
+
+
+.social ul {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+div.social-menu {
+  position: absolute; /* cuando ponemos esto le podemos hacer todo lo que queramos con BOTTOM, LEFT, RIGHT, UP*/
+  bottom: -150%;
+  right: 50%;
+  
+}
+.social ul li {
+  list-style: none;
+  margin: 0 10px;
+}
+.social ul li .fa {
+  color: #000000;
+  font-size: 25px;
+  line-height: 50px;
+  transition: .5s;
+}
+.social ul li .fa:hover {
+  color: #e7abab;
+}
+.social ul li a {
+  position: relative;
+  display: block;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: white;
+  text-align: center;
+  transition: 0.5s;
+  transform: translate(0,0px);
+  box-shadow: 0px 7px 5px rgba(0, 0, 0, 0.5);
+}
+.social ul li a:hover {
+  transform: rotate(0deg) skew(0deg) translate(0, -10px);
+}
+.social ul li:nth-child(1) a:hover {
+  background-color: #3b5999;
+}
+.social ul li:nth-child(2) a:hover {
+  background-color: #55acee;
+}
+.social ul li:nth-child(3) a:hover {
+  background-color: #f80632;
+}
+.social ul li:nth-child(4) a:hover {
+  background-color: #cd201f;
+}
+.social ul li:nth-child(5) a:hover {
+  background-color: #0077B5;
+}
+
+div.gallery {
+  border: 1px solid #ccc;
+}
+
+div.gallery:hover {
+  border: 1px solid #777;
+}
+
+div.gallery img {
+  width: 100%;
+  height: auto;
+}
+
+div.desc {
+  padding: 15px;
+  text-align: center;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.responsive {
+  padding: 0 6px;
+  float: left;
+  width: 24.99999%;
+}
+
+@media only screen and (max-width: 700px) {
+  .responsive {
+    width: 49.99999%;
+    margin: 6px 0;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .responsive {
+    width: 100%;
+  }
+}
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}

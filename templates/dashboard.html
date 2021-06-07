@@ -1,0 +1,56 @@
+<head>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <title>Hotel TEKAPA</title>
+</head>
+
+<body style="background-image: url(/static/images/login.jpg)">
+
+    <div class="topbar">
+        <h1 id="title">Client</h1>
+    </div>
+
+    <hr>
+
+    <div name="linkers" class="topnav">
+        <nav>
+            <a href="#" onclick="clientMenu()">Profile</a>
+            <a href="#" onclick="allReservations()">My Reservations</a>
+            <a href="#" onclick="food()">My food</a>
+            <a href="#" onclick="logout()">Logout</a>|
+        </nav>
+    </div>
+
+    <div class="main">
+
+        <div style="display:none" id="loginMenu" name="pages" w3-include-html="{{url_for('loginMenu')}}"></div>
+        <div style="display:none" id="rooms" name="pages" w3-include-html="{{url_for('rooms')}}"></div>
+        <div style="display:none" id="logIn" name="pages" w3-include-html="{{url_for('logIn')}}"></div>
+        <div style="display:none" id="createAccount" name="pages" w3-include-html="{{url_for('createAccount')}}">
+        </div>
+        <div style="display:none" id="contact" name="pages" w3-include-html="{{url_for('contact')}}"></div>
+        <div style="display:none" id="menu" name="pages" w3-include-html="{{url_for('menu')}}"></div>
+        <div style="display:none" id="aboutUs" name="pages" w3-include-html="{{url_for('aboutUs')}}"></div>
+        <div style="display:none" id="dateBooking" name="pages" w3-include-html="{{url_for('dateBooking')}}"></div>
+        <div style="display:block" id="clientMenu" name="pages" w3-include-html="{{url_for('clientMenu')}}"></div>
+        <div style="display:none" id="adminMenu" name="pages" w3-include-html="{{url_for('adminMenu')}}"></div>
+        <div style="display:none" id="checkCapacity" name="pages" w3-include-html="{{url_for('checkCapacity')}}"></div>
+        <div style="display:none" id="myReservations" name="pages" w3-include-html="{{url_for('myReservations')}}">
+        </div>
+        <div style="display:none" id="landingPage" name="pages" w3-include-html="{{url_for('landingPage')}}"></div>
+        <div style="display:none" id="food" name="pages" w3-include-html="{{url_for('food')}}"></div>
+        <div style="display:none" id="foodTable" name="pages" w3-include-html="{{url_for('foodTable')}}"></div>
+
+    </div>
+
+    <div class="social-menu">
+        <ul>
+            <li><a href="https://www.facebook.com/Tekapa-Hotel-1104252566413048/"><i class="fa fa-facebook"></i></a>
+            </li>
+            <li><a href="https://www.instagram.com/tekapahotel/?hl=en"><i class="fa fa-instagram"></i></a></li>
+        </ul>
+    </div>
+
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+    <script src="{{url_for('static', filename='script.js')}}"></script>
+</body>
