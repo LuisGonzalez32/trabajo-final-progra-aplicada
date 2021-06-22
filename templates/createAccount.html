@@ -1,12 +1,28 @@
 <body style="background-image: url(/static/images/login.jpg)">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <div>
         <div class="container">
-            <h2>Create New Account</h2>
-            <span>User</span>
-            <input type="text" name="user" id="user_reg" placeholder="user...">
-            <span>password</span>
-            <input type="text" name="passw" id="passw_reg" placeholder="password...">
-            <button onclick="registerNewUser()">Create account</button>
+            <form action="{{ url_for('createAccount') }}" method="post">
+                <label for="username">username:</label><br>
+                <input type="text" name="username" id="username">
+                <br><br>
+
+                <label for="useremail">useremail:</label><br>
+                <input type="text" name="useremail" id="useremail">
+                <br><br>
+
+                <label for="passwd">password:</label><br>
+                <input type="password" name="passwd" id="passwd">
+                <br><br>
+
+                <label for="confpasswd">confirm password:</label><br>
+                <input type="password" name="confpasswd" id="confpasswd">
+                <br><br>
+                <div class="g-recaptcha" data-sitekey="6LfEqg4bAAAAAJqacKGPgiHEyDS2IGk2-VpOiL5t"></div>
+                <br><br>
+
+                <input type="submit" value="Register">
+            </form>
         </div>
 
         <hr>

@@ -1,7 +1,11 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, request, url_for, flash
 from flask_cors import CORS, cross_origin
+from logic.user_logic import UserLogic
+import requests
+import bcrypt
 
 app = Flask(__name__)
+app.secret_key = "Bad1secret2key3!+"
 cors = CORS(app)
 app.config["CORS_HEADERS"] = "Content-Type"
 
@@ -31,14 +35,55 @@ def loginMenu():
     return render_template("loginMenu.html")
 
 
-@app.route("/logIn")
+@app.route("/logIn", methods=["GET", "POST"])
 def logIn():
-    return render_template("logIn.html")
+    if request.method == "GET":
+        return render_template("logIn.html")
+    elif request.method == "POST":
+        logic = UserLogic()
+        user = request.form["user"]
+        passwd = request.form["passwd"]
+        userDict = logic.getUser(user)
+        if userDict == []:
+            return redirect("logIn")
+        salt = userDict["salt"].encode("utf-8")
+        hashPasswd = bcrypt.hashpw(passwd.encode("utf-8"), salt)
+        dbPasswd = userDict["password"].encode("utf-8")
+        if hashPasswd == dbPasswd:
+            return redirect("dashboard")
 
 
-@app.route("/createAccount")
+@app.route("/createAccount", methods=["GET", "POST"])
 def createAccount():
-    return render_template("createAccount.html")
+    data = {}
+    if request.method == "GET":
+        return render_template("createAccount.html")
+    elif request.method == "POST":
+        logic = UserLogic()
+        userName = request.form["username"]
+        userEmail = request.form["useremail"]
+        passwd = request.form["passwd"]
+        confpasswd = request.form["confpasswd"]
+        if passwd == confpasswd:
+            salt = bcrypt.gensalt(rounds=14)
+            strSalt = salt.decode("utf-8")
+            encPasswd = passwd.encode("utf-8")
+            hashPasswd = bcrypt.hashpw(encPasswd, salt)
+            strPasswd = hashPasswd.decode("utf-8")
+
+            data["secret"] = "6LfEqg4bAAAAAHQCjHfFh4QeMmha2AKR0V2E99qO"
+            data["response"] = request.form["g-recaptcha-response"]
+            response = requests.post(
+                "https://www.google.com/recaptcha/api/siteverify", params=data
+            )
+            if response.status_code == 200:
+                messageJson = response.json()
+                print(messageJson)
+                if messageJson["success"]:
+                    rows = logic.insertUser(userName, userEmail, strPasswd, strSalt)
+                    return redirect("logIn")
+
+        return render_template("createAccount.html")
 
 
 @app.route("/contact")
