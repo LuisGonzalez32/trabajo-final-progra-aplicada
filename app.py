@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, request, url_for, flash
+from flask import Flask, render_template, redirect, request, url_for, flash, session
 from flask_cors import CORS, cross_origin
 from logic.user_logic import UserLogic
 import requests
@@ -15,9 +15,15 @@ def home():
     return render_template("index.html")
 
 
-@app.route("/dashboard")
+@app.route("/dashboard", methods=["GET", "POST"])
 def dashboard():
-    return render_template("dashboard.html")
+    # session.pop("loggedIn")
+    if session.get("loggedIn"):
+        # user = session.get("login_user")
+        print(session.get("loggedIn"))
+        return render_template("dashboard.html")  # , user=user)
+    else:
+        return redirect("logIn")
 
 
 @app.route("/adminDashboard")
@@ -30,27 +36,32 @@ def rooms():
     return render_template("rooms.html")
 
 
-@app.route("/loginMenu")
-def loginMenu():
-    return render_template("loginMenu.html")
-
-
 @app.route("/logIn", methods=["GET", "POST"])
 def logIn():
     if request.method == "GET":
         return render_template("logIn.html")
     elif request.method == "POST":
+        session["loggedIn"] = False
         logic = UserLogic()
         user = request.form["user"]
         passwd = request.form["passwd"]
         userDict = logic.getUser(user)
+
         if userDict == []:
             return redirect("logIn")
+
         salt = userDict["salt"].encode("utf-8")
         hashPasswd = bcrypt.hashpw(passwd.encode("utf-8"), salt)
         dbPasswd = userDict["password"].encode("utf-8")
+
         if hashPasswd == dbPasswd:
-            return redirect("dashboard")
+
+            role = userDict["role"]
+            if role == "client":
+                session["loggedIn"] = True
+                return redirect("dashboard")
+            else:
+                return redirect("adminDashboard")
 
 
 @app.route("/createAccount", methods=["GET", "POST"])
@@ -61,7 +72,6 @@ def createAccount():
     elif request.method == "POST":
         logic = UserLogic()
         userName = request.form["username"]
-        userEmail = request.form["useremail"]
         passwd = request.form["passwd"]
         confpasswd = request.form["confpasswd"]
         if passwd == confpasswd:
@@ -80,25 +90,15 @@ def createAccount():
                 messageJson = response.json()
                 print(messageJson)
                 if messageJson["success"]:
-                    rows = logic.insertUser(userName, userEmail, strPasswd, strSalt)
+                    rows = logic.insertUser(userName, strPasswd, strSalt)
                     return redirect("logIn")
 
         return render_template("createAccount.html")
 
 
-@app.route("/contact")
-def contact():
-    return render_template("contact.html")
-
-
-@app.route("/menu")
-def menu():
-    return render_template("menu.html")
-
-
-@app.route("/aboutUs")
-def aboutUs():
-    return render_template("aboutUs.html")
+@app.route("/loginMenu")
+def loginMenu():
+    return render_template("loginMenu.html")
 
 
 @app.route("/dateBooking")
@@ -144,6 +144,15 @@ def foodTable():
 @app.route("/instalaciones")
 def instalaciones():
     return render_template("instalaciones.html")
+
+
+@app.route("/logout")
+def logout():
+    if session.get("loggedIn"):
+        session.pop("loggedIn")
+        return redirect("logIn")
+    else:
+        return redirect("logIn")
 
 
 if __name__ == "__main__":

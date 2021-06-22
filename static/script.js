@@ -14,31 +14,6 @@ function hideAllDivW3Includes() {
 }
 
 
-
-function registerNewUser() {
-    var reg_user = document.getElementById("user_reg").value;
-    var reg_password = document.getElementById("passw_reg").value;
-    var reg_role = "client";
-
-    var userArray = [];
-
-    if (localStorage.getItem("lUserArray") !== null) {
-        userArray = JSON.parse(localStorage.getItem("lUserArray"));
-    }
-
-    var current_reg = {
-        user: reg_user,
-        password: reg_password,
-        role: reg_role
-    };
-
-    userArray.push(current_reg);
-
-    localStorage.setItem("lUserArray", JSON.stringify(userArray));
-
-    window.location.href = "logIn";
-}
-
 function loginMenu() {
     var radios = document.getElementsByName('loginMenu');
     for (var i = 0, length = radios.length; i < length; i++) {
@@ -55,84 +30,13 @@ function loginMenu() {
     }
 }
 
-function checkLogin() {
-    var user = document.getElementById("user").value;
-    var password = document.getElementById("passw").value;
-
-    var userArray = JSON.parse(localStorage.getItem("lUserArray"));
-
-    if (user !== null && user !== "") {
-        if (password !== null && password !== "") {
-            var canLogin = checkLoginInfo(user, password, userArray);
-
-            if (canLogin === true) {
-                var role = getUserRole(user, password, userArray)
-
-                createSessionUser(user, password, role)
-                if (role === "admin") {
-                    window.location.href = "adminDashboard";
-                }
-                else {
-                    window.location.href = "dashboard";
-                }
-            } else {
-                alert("user or password are not correct");
-            }
-        } else {
-            alert("password must not be empty");
-        }
-    } else {
-        alert("user must not be empty");
-    }
-}
-
-function checkLoginInfo(user, password, userArray) {
-    if (userArray !== null && userArray.length > 0) {
-        for (var i = 0; i < userArray.length; i++) {
-            if (userArray[i].user === user && userArray[i].password === password) {
-                return true;
-            }
-        }
-    }
-    return false;
-}
-
-function getUserRole(pUser, pPassword, pUserArray) {
-    var role = ""
-    if (pUserArray !== null && pUserArray.length > 0) {
-        var length = pUserArray.length
-        for (var i = 0; i < length; i++) {
-            if (pUserArray[i].user === pUser && pUserArray[i].password === pPassword) {
-                role = pUserArray[i].role
-                break
-            }
-        }
-    }
-    return role
-}
-
-function createSessionUser(user, password, role) {
-    var logged_user = {
-        user: user,
-        password: password,
-        role: role
-    };
-    sessionStorage.setItem("loggedUser", JSON.stringify(logged_user));
-}
-
 
 //--------------------------------------------------------------------------------------------------------------------
 function checkSession() {
-    checkForValidLoginSession()
     w3.includeHTML()
 }
 
-function checkForValidLoginSession() {
 
-    if (sessionStorage.getItem("loggedUser") == null) {
-        window.location.href = "logIn"
-    }
-}
 
 function setUserNameOnDashboard() {
     var sessionUserArray = JSON.parse(sessionStorage.getItem("loggedUser"))
@@ -143,10 +47,8 @@ function setUserNameOnDashboard() {
     userSpan.innerText = "Hello, " + currentRole + " " + currentUser
 }
 
-function logout() {
-    sessionStorage.removeItem("loggedUser")
-    hideDivById("loginMenu");
-}
+
+
 
 
 //----------------------------------------------------------------------------------------------------------------------------------
@@ -154,7 +56,6 @@ function logout() {
 function displayRooms(capacity) {
 
     hideDivById('rooms');
-    checkSession();
     setUserNameOnDashboard()
 
     var roomsArray = JSON.parse(localStorage.getItem("lRoomsArray"));
@@ -212,7 +113,6 @@ function bookingRoom(id, price) {
 function displayFood(capacity) {
 
     hideDivById('food');
-    checkSession();
 
     var services = JSON.parse(localStorage.getItem("services"));
 
@@ -348,7 +248,6 @@ function roomCapacity() {
 }
 
 function clientMenu() {
-    checkSession();
     hideDivById('clientMenu');
 }
 
