@@ -1,8 +1,46 @@
-<ul id="ul2">
-    <h2>Order Food</h2>
-    <li id="li11"></li>
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 35%;
+    }
+
+    td,
+    th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
+
+<ul id="ul1">
+    <h2>Book a room (choose)</h2>
+    <form action="{{ url_for('logIn') }}" method="POST"></form>
+    <table>
+
+        <tr>
+            <th>Name</th>
+            <th>Capacity</th>
+            <th>Balcon</th>
+            <th></th>
+        </tr>
+        {% for person in persons %}
+        {%if [person["capacity"]] == user%}
+        <tr>
+            <td>{{ person["capacity"] }}</td>
+            <td>{{ person["capacity"] }}</td>
+            <td>{{ person["balcon"] }}</td>
+            <td><input type="submit"></td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+    </table>
     <br><br>
-    <button onclick="hideDivById('clientMenu')">Back to menu</button>
+    <a href="{{ url_for('dashboard') }}"><button>Back to menu</button></a>
     <br><br>
-    <button onclick="logout()">logout</button>
+    <a href="{{ url_for('logout') }}"><button>Logout</button></a>
 </ul>

@@ -15,10 +15,20 @@ class UserLogic(PybaLogic):
         rows = database.executeNonQueryRows(sql)
         return rows
 
+    def bookRoom(self, userId, roomId):
+        database = self.createDatabaseObj()
+        sql = (
+            "INSERT INTO `hotel`.`roomsBooked` "
+            + "(`id`,`userId`,`bookId`) "
+            + f"VALUES(0,'{userId}', '{roomId}');"
+        )
+        rows = database.executeNonQueryRows(sql)
+        return rows
+
     def getUser(self, user):
         database = self.createDatabaseObj()
         sql = (
-            "SELECT user, role, password, salt "
+            "SELECT id, user, role, password, salt "
             + f"FROM hotel.preloadusers where user like '{user}';"
         )
         result = database.executeQuery(sql)
@@ -29,12 +39,15 @@ class UserLogic(PybaLogic):
 
     def getAllRooms(self):
         database = self.createDatabaseObj()
-        sql = "SELECT * FROM hotel.preloadrooms;;"
+        sql = "select * from hotel.preloadrooms;"
         result = database.executeQuery(sql)
-        if len(result) > 0:
-            return result[0]
-        else:
-            return []
+        return result
+
+    def getAllFood(self):
+        database = self.createDatabaseObj()
+        sql = "select * from hotel.food;"
+        result = database.executeQuery(sql)
+        return result
 
     def getRoom(self, roomId):
         database = self.createDatabaseObj()

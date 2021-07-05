@@ -14,6 +14,7 @@ function hideAllDivW3Includes() {
 }
 
 
+
 function loginMenu() {
     var radios = document.getElementsByName('loginMenu');
     for (var i = 0, length = radios.length; i < length; i++) {
@@ -28,23 +29,6 @@ function loginMenu() {
             break;
         }
     }
-}
-
-
-//--------------------------------------------------------------------------------------------------------------------
-function checkSession() {
-    w3.includeHTML()
-}
-
-
-
-function setUserNameOnDashboard() {
-    var sessionUserArray = JSON.parse(sessionStorage.getItem("loggedUser"))
-    var currentUser = sessionUserArray.user
-    var currentRole = sessionUserArray.role
-
-    var userSpan = document.getElementById("sessionUser")
-    userSpan.innerText = "Hello, " + currentRole + " " + currentUser
 }
 
 

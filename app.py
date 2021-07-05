@@ -31,11 +31,6 @@ def adminDashboard():
     return render_template("adminDashboard.html")
 
 
-@app.route("/rooms")
-def rooms():
-    return render_template("rooms.html")
-
-
 @app.route("/logIn", methods=["GET", "POST"])
 def logIn():
     if request.method == "GET":
@@ -116,9 +111,36 @@ def adminMenu():
     return render_template("adminMenu.html")
 
 
-@app.route("/checkCapacity")
+@app.route("/rooms", methods=["GET", "POST"])
+def rooms():
+    if request.method == "GET":
+        return render_template("rooms.html")
+    elif request.method == "POST":
+        user = request.form.getlist("checkCapacity", type=int)
+        logic = UserLogic()
+        personArray = logic.getAllRooms()
+        return render_template("rooms.html", persons=personArray, user=user)
+
+
+@app.route("/bookRoom", methods=["GET", "POST"])
+def bookRoom():
+    if request.method == "GET":
+        return render_template("checkCapacity.html")
+    if request.method == "POST":
+        # print("siiiiiiiiiiiiuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu")
+        # user = request.form.get("name")
+        # print(user)
+        # return user
+        return render_template("checkCapacity.html")
+
+
+@app.route("/checkCapacity", methods=["GET", "POST"])
 def checkCapacity():
-    return render_template("checkCapacity.html")
+    if request.method == "GET":
+        return render_template("checkCapacity.html")
+    elif request.method == "POST":
+        user = request.form["checkCapacity"]
+        return render_template("checkCapacity.html", user=user)
 
 
 @app.route("/myReservations")
@@ -131,9 +153,15 @@ def landingPage():
     return render_template("landingPage.html")
 
 
-@app.route("/food")
+@app.route("/food", methods=["GET", "POST"])
 def food():
-    return render_template("food.html")
+    if request.method == "GET":
+        return render_template("food.html")
+    elif request.method == "POST":
+        user = request.form.getlist("checkCapacity")
+        logic = UserLogic()
+        FoodArray = logic.getAllFood()
+        return render_template("food.html", food=FoodArray)
 
 
 @app.route("/foodTable")
@@ -144,6 +172,16 @@ def foodTable():
 @app.route("/instalaciones")
 def instalaciones():
     return render_template("instalaciones.html")
+
+
+@app.route("/chooseRoom", methods=["GET", "POST"])
+def chooseRoom():
+    data = {}
+    if request.method == "GET":
+        return render_template("createAccount.html")
+    elif request.method == "POST":
+
+        return render_template("createAccount.html")
 
 
 @app.route("/logout")
