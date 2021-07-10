@@ -19,7 +19,6 @@
 
 <ul id="ul1">
     <h2>Book a room (choose)</h2>
-    <form action="{{ url_for('logIn') }}" method="POST"></form>
     <table>
 
         <tr>
@@ -31,10 +30,15 @@
         {% for person in persons %}
         {%if [person["capacity"]] == user%}
         <tr>
-            <td>{{ person["capacity"] }}</td>
+            <td>{{ person["name"] }}</td>
             <td>{{ person["capacity"] }}</td>
             <td>{{ person["balcon"] }}</td>
-            <td><input type="submit"></td>
+            <td>
+                <form action="{{ url_for('bookRoom') }}" method="POST">
+                    <input type="hidden" name="name1" value="{{ person['id'] }}">
+                    <input type="submit" value="select">
+                </form>
+            </td>
         </tr>
         {% endif %}
         {% endfor %}

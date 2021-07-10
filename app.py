@@ -127,11 +127,8 @@ def bookRoom():
     if request.method == "GET":
         return render_template("checkCapacity.html")
     if request.method == "POST":
-        # print("siiiiiiiiiiiiuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu")
-        # user = request.form.get("name")
-        # print(user)
-        # return user
-        return render_template("checkCapacity.html")
+        user = request.form["name1"]
+        return user
 
 
 @app.route("/checkCapacity", methods=["GET", "POST"])
