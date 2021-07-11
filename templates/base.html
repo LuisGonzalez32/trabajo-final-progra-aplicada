@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <title>Hotel TEKAPA</title>
+</head>
+
+<body style="background-image: url(/static/images/login.jpg)">
+
+    <div class="topbar">
+        <h1 id="title">Client</h1>
+    </div>
+
+    <hr>
+
+    <div name="linkers" class="topnav">
+        <nav>
+            <a href="{{ url_for('dashboard') }}">Profile</a>
+            <a href="{{ url_for('myReservations') }}">My Reservations</a>
+            <a href="{{ url_for('food') }}">My food</a>
+            <a href="{{ url_for('logout') }}">logout</a>
+        </nav>
+    </div>
+
+    {% block custom_body%}
+    {%endblock custom_body%}
+
+
+
+    <div class="social-menu">
+        <ul>
+            <li><a href="https://www.facebook.com/Tekapa-Hotel-1104252566413048/"><i class="fa fa-facebook"></i></a>
+            </li>
+            <li><a href="https://www.instagram.com/tekapahotel/?hl=en"><i class="fa fa-instagram"></i></a></li>
+        </ul>
+    </div>
+
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+    <script src="{{url_for('static', filename='script.js')}}"></script>
+</body>
+
+</html>

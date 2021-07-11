@@ -1,5 +1,6 @@
-<!DOCTYPE html>
-<html>
+{%extends 'base.html'%}
+
+{% block custom_body%}
 
 <head>
     <link rel="stylesheet" href="/static/style.css">
@@ -24,16 +25,32 @@
     <h2>Reservations</h2>
 
     <table id="myTable" class="myTable" style="width:100%">
+
         <tr>
             <th>Name</th>
-            <th>room</th>
-            <th>CheckIn</th>
-            <th>CheckOut</th>
-            <th> </th>
+            <th>Capacity</th>
+            <th>checkIn</th>
+            <th>checkout</th>
+            <th></th>
         </tr>
+
+        {% for room in roomsBooked %}
+        {%if room["user_name"] == userName%}
+        <tr>
+            <td>{{ room["user_name"] }}</td>
+            <td>{{ room["room"] }}</td>
+            <td>{{ room["checkin"] }}</td>
+            <td>{{ room["checkout"] }}</td>
+            <td>
+                <form action="{{ url_for('deleteRoom') }}" method="POST">
+                    <input type="hidden" name="id" value="{{ room['id'] }}">
+                    <input type="submit" value="Delete">
+                </form>
+            </td>
+        </tr>
+        {% endif %}
+        {% endfor %}
     </table>
 
-    <a id="li2"></a>
 </body>
-
-</html>
+{%endblock custom_body%}

@@ -1,25 +1,27 @@
-<br><br>
-<link rel="stylesheet" href="/static/style.css">
-<p> </p>
+<!DOCTYPE html>
+<html lang="en">
 
-<body style="background-image: url(/static/images/login.jpg)">
-    <div>
-        <div>
-            <div class="container">
-                <form action="{{ url_for('logIn') }}" method="post">
-                    <h2>Log in</h2>
-                    <label for="user">user</label>
-                    <input type="text" name="user" id="user" placeholder="user...">
-                    <label for="passw">password</label>
-                    <input type="text" name="passwd" id="passwd" placeholder="password...">
-                    <input type="submit" value="Register">
-                </form>
-            </div>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+</head>
 
-            <br>
-            <a href="createAccount"><button>Create account</button></a>
-            <hr>
+<body>
+    <h1>login</h1>
+    <p>this is login</p>
 
-            <script src="{{url_for('static', filename='script.js')}}"></script>
-        </div>
+    <form action="{{ url_for('login') }}" method="post">
+        <label for="user">user:</label><br>
+        <input type="text" name="user" id="user">
+        <br><br>
+        <label for="password">password:</label><br>
+        <input type="password" name="password" id="password">
+        <br><br>
+        <input type="submit" value="Login">
+
+    </form>
 </body>
+
+</html>

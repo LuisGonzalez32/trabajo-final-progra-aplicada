@@ -1,17 +1,19 @@
-<link rel="stylesheet" href="/static/style.css">
-<p> </p>
+{%extends 'landingPage.html'%}
+{% block index%}
 <div>
     <br>
-    <form id="form">
-        <label id="myLabel" for="login">Log in</label>
-        <input type="radio" name="loginMenu" id="login" value="logIn" checked><br>
-        <label id="myLabel" for="signin">Create account</label>
-        <input type="radio" name="loginMenu" id="signin" value="createAccount"><br>
-    </form><br><br>
+    <form action="{{ url_for('loginMenu') }}" method="POST">
 
-    <button onClick="loginMenu()">send</button>
-    <br><br>
 
-    <script src="{{url_for('static', filename='script.js')}}"></script>
+        <label for="1">Register</label>
+        <input type="radio" name="logMenu" id="1" value="register" checked><br>
+        <label for="2">Log in</label>
+        <input type="radio" name="logMenu" id="2" value="login"><br>
+        <br><br>
+        <input type="submit">
+    </form>
+
+
 
 </div>
+{%endblock index%}
