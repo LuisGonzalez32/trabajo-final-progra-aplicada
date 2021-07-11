@@ -1,71 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
+{%extends 'landingPage.html'%}
+{% block index%}
+<div class="main">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/style.css">
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <title>Hotel Tekapa</title>
-</head>
+    <div class="row">
+        <div class="leftcolumn ">
+            <div class="card" style="background-image: url(/static/images/madera.jpg)">
+                <h2>TEKAPA</h2>
+                <h5>Vive una experiencia renovadora junto a nosotros...</h5>
+                <img class="img2" src="/static/images/terraza2.jpeg" alt="Pineapple" width="300" height="300">
+                <p>¿Quiénes somos?</p>
+                <p>Somos un hotel cinco estrellas creado en el 2019, capacitados para brindar la mejor experiencia a
+                    los huéspedes que buscan despejar su mente en un ambiente natural. Contamos con un restaurante
+                    bistro abierto las 24 horas para los huéspedes. Tenemos una variedad de habitaciones, según las
+                    necesidades de las personas.</p>
+            </div>
+            <div class="card" style="background-image: url(/static/images/madera.jpg)">
+                <h2>¿Qué nos diferencia?</h2>
+                <h5>Nuestra visión es convertirnos en una empresa de suprema calidad y que nuestros clientes se
+                    sientan cómodos en nuestras instalaciones, que tengan una experiencia grata y placentera en cada
+                    una de nuestras visitas para ganarnos sus corazones.
+                    Ser una familia TEKAPA</h5>
+                <img class="img2" src="/static/images/terrazaAbajo.jpeg" alt="Pineapple" width="300" height="300">
+                <p>Nuestros clientes: una prioridad</p>
+                <p>Estamos a tu servicio para realizar reservaciones y para cualquier consulta que se le presente.
+                </p>
+            </div>
+        </div>
 
-<body style="background-image: url(/static/images/cafe.jpg)">
+        <div class="rightcolumn" style="background-image: url(/static/images/cafe.jpg)">
+            <div class="card" style="background-image: url(/static/images/madera.jpg)">
+                <h2>Estamos ubicados en Alegría, Usulután, nos pueden ubicar por medio de la aplicación Waze.</h2>
+                <div class="fakeimg" style="height:100px;">Disfruta de un ambiente familiar lleno de naturaleza.
 
-    <div class="header" style="background-image: url(/static/images/titulo.jpg)">
-        <h1>TEKAPA</h1>
-        <p>Una nueva experiencia...</p>
-    </div>
+                </div>
+                <img class="img2" src="/static/images/ubicacion.jpeg" alt="Pineapple" width="300" height="350">
 
-    <hr>
-
-
-
-    <div id="titulos" class="topnav">
-        <div id="jumm" name="linkers" class="container">
-            <a href="#" onclick="hideDivById('loginMenu')">Login</a>
-            <a href="#">Profile</a>
-            <a href="#" onclick="hideDivById('instalaciones')">instalaciones</a>
-            <a href="#">About us</a>
-            <a href="#">Menu</a>
-            <a href="#">Contact</a>
+            </div>
+            <div class="card" style="background-image: url(/static/images/madera.jpg)">
+                <h1>Bistro</h1>
+                <div class="fakeimg">
+                    <img class="img2" src="/static/images/bebida.jpeg" alt="Pineapple" width="150" height="150">
+                    <p> Bebidas</p>
+                </div>
+                <div class="fakeimg">
+                    <img class="img2" src="/static/images/pie.jpeg" alt="Pineapple" width="150" height="150">
+                    <p>postres</p>
+                </div>
+                <div class="fakeimg">
+                    <img class="img2" src="/static/images/parrillada.jpeg" alt="Pineapple" width="150" height="150">
+                    <p>platos fuertes</p>
+                </div>
+            </div>
+            <div class="card" style="background-image: url(/static/images/madera.jpg)">
+                <h2>Contactanos</h2>
+                <p>tekapa.hotel@gmail.com</p>
+                <p>2343-4587</p>
+            </div>
         </div>
     </div>
 
-    <div class="main">
 
-        <div style="display:none" id="loginMenu" name="pages" w3-include-html="{{url_for('loginMenu')}}"></div>
-        <div style="display:none" id="rooms" name="pages" w3-include-html="{{url_for('rooms')}}"></div>
-        <div style="display:none" id="logIn" name="pages" w3-include-html="{{url_for('logIn')}}"></div>
-        <div style="display:none" id="createAccount" name="pages" w3-include-html="{{url_for('createAccount')}}">
-        </div>
-        <div style="display:none" id="contact" name="pages" w3-include-html="{{url_for('contact')}}"></div>
-        <div style="display:none" id="menu" name="pages" w3-include-html="{{url_for('menu')}}"></div>
-        <div style="display:none" id="aboutUs" name="pages" w3-include-html="{{url_for('aboutUs')}}"></div>
-        <div style="display:none" id="dateBooking" name="pages" w3-include-html="{{url_for('dateBooking')}}"></div>
-        <div style="display:none" id="clientMenu" name="pages" w3-include-html="{{url_for('clientMenu')}}"></div>
-        <div style="display:none" id="adminMenu" name="pages" w3-include-html="{{url_for('adminMenu')}}"></div>
-        <div style="display:none" id="checkCapacity" name="pages" w3-include-html="{{url_for('checkCapacity')}}"></div>
-        <div style="display:none" id="instalaciones" name="pages" w3-include-html="{{url_for('instalaciones')}}">
-        </div>
-        <div style="display:none" id="myReservations" name="pages" w3-include-html="{{url_for('myReservations')}}">
-        </div>
-        <div style="display:block" id="landingPage" name="pages" w3-include-html="{{url_for('landingPage')}}"></div>
-
-    </div>
-    <br><br>
-
-    <div class="social-menu">
-        <ul>
-            <li><a href="https://www.facebook.com/Tekapa-Hotel-1104252566413048/"><i class="fa fa-facebook"></i></a>
-            </li>
-            <li><a href="https://www.instagram.com/tekapahotel/?hl=en"><i class="fa fa-instagram"></i></a></li>
-        </ul>
-    </div>
-
-    <script src="https://www.w3schools.com/lib/w3.js"></script>
-    <script src="{{url_for('static', filename='preload.js')}}"></script>
-    <script src="{{url_for('static', filename='script.js')}}"></script>
-</body>
-
-</html>
+</div>
+{%endblock index%}

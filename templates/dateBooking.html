@@ -1,12 +1,19 @@
-<div>
-    <br><br>
-    <label for="checkIn">Check in</label>
-    <input type="date" id="checkIn" name="checkIn">
-    <br><br>
-    <label for="checkOut">Check out</label>
-    <input type="date" id="checkOut" name="checkOut">
-    <button id="bookRoomButton">send</button>
-    <br><br>
-    <button id="roomBooking">Book another room</button>
+{%extends 'base.html'%}
 
-</div>
+{% block custom_body%}
+
+<h1>Show a Date and Time Control</h1>
+
+<form action="{{ url_for('dateBooking') }}" method="POST">
+    <label for="birthdaytime">Birthday (date and time):</label>
+    <input type="datetime-local" id="birthdaytime" name="checkin">
+    <br><br>
+    <label for="birthdaytime">check out</label>
+    <input type="datetime-local" id="birthdaytime" name="checkout">
+
+    <input type="hidden" name="userId" value="{{userId}}">
+    <input type="hidden" name="roomId" value="{{roomId}}">
+    <input type="submit">
+</form>
+
+{%endblock custom_body%}

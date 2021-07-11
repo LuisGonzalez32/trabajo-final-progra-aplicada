@@ -1,21 +1,27 @@
-<br><br>
-<link rel="stylesheet" href="/static/style.css">
-<p> </p>
-<body style="background-image: url(/static/images/login.jpg)">
-    <div>
-        <div class="container">
-            <h2>Log in</h2>
-            <label for="user">user</label>
-            <input type="text" name="user" id="user" placeholder="user...">
-            <label for="passw">password</label>
-            <input type="text" name="passw" id="passw" placeholder="password...">
-            <button onclick="checkLogin()">log in</button>
-        </div>
+<!DOCTYPE html>
+<html lang="en">
 
-        <br>
-        <a href="createAccount"><button>Create account</button></a>
-        <hr>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+</head>
 
-        <script src="{{url_for('static', filename='script.js')}}"></script>
-    </div>
+<body>
+    <h1>login</h1>
+    <p>this is login</p>
+
+    <form action="{{ url_for('login') }}" method="post">
+        <label for="user">user:</label><br>
+        <input type="text" name="user" id="user">
+        <br><br>
+        <label for="password">password:</label><br>
+        <input type="password" name="password" id="password">
+        <br><br>
+        <input type="submit" value="Login">
+
+    </form>
 </body>
+
+</html>

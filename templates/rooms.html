@@ -1,9 +1,52 @@
+{%extends 'base.html'%}
+
+{% block custom_body%}
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 35%;
+    }
+
+    td,
+    th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
+
 <ul id="ul1">
     <h2>Book a room (choose)</h2>
-    <h3 id="sessionUser"></h3>
-    <li id="li1"></li>
+    <table>
+
+        <tr>
+            <th>Name</th>
+            <th>Capacity</th>
+            <th>Balcon</th>
+            <th></th>
+        </tr>
+        {% for person in persons %}
+        {%if [person["capacity"]] == user%}
+        <tr>
+            <td>{{ person["room"] }}</td>
+            <td>{{ person["capacity"] }}</td>
+            <td>{{ person["balcon"] }}</td>
+            <td>
+                <form action="{{ url_for('bookRoom') }}" method="POST">
+                    <input type="hidden" name="roomId" value="{{ person['id'] }}">
+                    <input type="submit" value="select">
+                </form>
+            </td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+    </table>
     <br><br>
-    <button onclick="hideDivById('clientMenu')">Back to menu</button>
-    <br><br>
-    <button onclick="logout()">logout</button>
+    <a href="{{ url_for('dashboard') }}"><button>Back to menu</button></a>
 </ul>
+{%endblock custom_body%}

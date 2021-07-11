@@ -1,16 +1,21 @@
+{%extends 'base.html'%}
+
+{% block custom_body%}
 <div>
     <h1>How many people would you like to reserve for?</h1>
     <br>
-    <form>
+    <form action="{{ url_for('rooms') }}" method="POST">
+
+
         <label for="1">1 client</label>
         <input type="radio" name="checkCapacity" id="1" value="1" checked><br>
         <label for="3">3 clients</label>
         <input type="radio" name="checkCapacity" id="3" value="3"><br>
         <label for="5">5 clients</label>
-        <input type="radio" name="checkCapacity" id="si5gnin" value="5"><br>
-    </form><br><br>
-
-    <button onClick="roomCapacity()">send</button>
-    <br><br>
-
+        <input type="radio" name="checkCapacity" id="5" value="5"><br>
+        <br><br>
+        <input type="submit">
+    </form>
 </div>
+
+{%endblock custom_body%}
