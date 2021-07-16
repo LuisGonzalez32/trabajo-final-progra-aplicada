@@ -162,6 +162,13 @@ class DashboardRoutes:
                 logic.deleteRoomBooked(roomId)
                 return render_template("dashboard.html")
 
+        @app.route("/deleteEvent", methods=["POST"])
+        def deleteEvent():
+            if request.method == "POST":
+                eventId = request.form["id"]
+                logic.deleteEvent(eventId)
+                return render_template("dashboard.html")
+
         @app.route("/eventTable")
         def eventTable():
             userName = session["login_user"]

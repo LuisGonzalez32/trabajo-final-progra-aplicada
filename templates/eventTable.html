@@ -38,6 +38,7 @@
             <th>Event name</th>
             <th>Date</th>
             <th>number of people</th>
+            <th></th>
         </tr>
 
 
@@ -48,6 +49,12 @@
             <td>{{ event["event_name"] }}</td>
             <td>{{ event["date"] }}</td>
             <td>{{ event["number_of_people"] }}</td>
+            <td>
+                <form action="{{ url_for('deleteEvent') }}" method="POST">
+                    <input type="hidden" name="id" value="{{ event['id'] }}">
+                    <input type="submit" value="Delete">
+                </form>
+            </td>
 
         </tr>
 

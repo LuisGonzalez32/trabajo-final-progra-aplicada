@@ -73,3 +73,9 @@ class UserLogic(PybaLogic):
         sql = f"Delete FROM hotel.roomsBooked where id = '{room}';"
         rows = database.executeNonQueryRows(sql)
         return rows
+
+    def deleteEvent(self, room):
+        database = self.createDatabaseObj()
+        sql = f"Delete FROM hotel.event where id = '{room}';"
+        rows = database.executeNonQueryRows(sql)
+        return rows

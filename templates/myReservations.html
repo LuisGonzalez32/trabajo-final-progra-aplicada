@@ -50,7 +50,7 @@
                 <td>{{ room["checkin"] }}</td>
                 <td>{{ room["checkout"] }}</td>
                 <td>
-                    <form action="{{ url_for('deleteRoom') }}" method="POST">
+                    <form action="{{ url_for('deleteEvent') }}" method="POST">
                         <input type="hidden" name="id" value="{{ room['id'] }}">
                         <input type="submit" value="Delete">
                     </form>
