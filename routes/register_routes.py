@@ -18,7 +18,7 @@ class RegisterRoutes:
                     # verificar que el usuario sea unico
                     logic = UserLogic()
                     username = request.form["user"]
-                    result = logic.getRowByUser(username)
+                    result = logic.getUser(username)
                     if len(result) == 0:
 
                         # verificar que el password sea igual al confirm password

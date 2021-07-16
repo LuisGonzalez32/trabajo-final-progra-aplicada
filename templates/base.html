@@ -542,38 +542,30 @@
     <input type="checkbox" id="nav-toggle">
     <div class="sidebar">
         <div class="sidebar-brand">
-            <h2><span class="las la-clinic-medical"></span> <span>Hospital</span></h2>
+            <h2><span class="las la-clinic-medical"></span> <span>Dashboard</span></h2>
         </div>
         <!--Secciones-del-tablero-->
         <div class="sidebar-menu">
             <ul>
                 <li>
                     <a href="{{ url_for('dashboard') }}" class="active"><span class="las la-home"></span>
-                        <span>Tablero</span></a>
+                        <span>Menu</span></a>
                 </li>
                 <li>
-                    <a href=""><span class="las la-stethoscope"></span>
-                        <span>Doctores</span></a>
+                    <a href="{{ url_for('checkCapacity') }}"><span class="las la-stethoscope"></span>
+                        <span>Book a room</span></a>
                 </li>
                 <li>
-                    <a href=""><span class="las la-user"></span>
-                        <span>Usuarios</span></a>
+                    <a href="{{ url_for('myReservations') }}"><span class="las la-user"></span>
+                        <span>My reservations</span></a>
                 </li>
                 <li>
-                    <a href=""><span class="las la-user-injured"></span>
-                        <span>Pacientes</span></a>
+                    <a href="{{ url_for('bookEvent') }}"><span class="las la-user-injured"></span>
+                        <span>Book an event</span></a>
                 </li>
                 <li>
-                    <a href=""><span class="las la-history"></span>
-                        <span>Historial de citas</span></a>
-                </li>
-                <li>
-                    <a href=""><span class="las la-search"></span>
-                        <span>Busqueda de pacientes</span></a>
-                </li>
-                <li>
-                    <a href=""><span class="las la-book-medical"></span>
-                        <span>Informes</span></a>
+                    <a href="{{ url_for('eventTable') }}"><span class="las la-history"></span>
+                        <span>My events</span></a>
                 </li>
             </ul>
         </div>
@@ -584,12 +576,14 @@
             <h2>
                 <label for="nav-toggle">
                     <span class="las la-bars"></span>
-                </label> Tablero
+                </label>
             </h2>
 
             <div class="search-wrapper">
                 <span class="las la-search"></span>
-                <input type="search" placeholder="Buscar aquí" />
+                <form action="{{ url_for('bookEvent') }}" method="POST">
+                    <input type="search" name="search" />
+                </form>
             </div>
             <div class="user-wrapper">
 
@@ -603,9 +597,7 @@
         {% block custom_body%}
         {%endblock custom_body%}
 
-
     </div>
-
 </body>
 
 </html>

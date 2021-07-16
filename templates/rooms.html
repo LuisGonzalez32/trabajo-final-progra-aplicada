@@ -18,37 +18,47 @@
     tr:nth-child(even) {
         background-color: #dddddd;
     }
+
+    div.relative {
+        position: relative;
+        bottom: -130px;
+        right: -100px;
+    }
 </style>
 
-<ul id="ul1">
-    <h2>Choose a room </h2>
-    <table>
+<div class="relative">
+    <ul id="ul1">
+        <h2>Choose a room </h2>
+        <table style="width:50%">
 
-        <tr>
-            <th>Room number</th>
-            <th>Capacity</th>
-            <th>Balcon</th>
-            <th>Price</th>
-            <th></th>
-        </tr>
-        {% for person in persons %}
-        {%if [person["capacity"]] == user%}
-        <tr>
-            <td>{{ person["room"] }}</td>
-            <td>{{ person["capacity"] }}</td>
-            <td>{{ person["balcon"] }}</td>
-            <td>${{ person["price"] }}</td>
-            <td>
-                <form action="{{ url_for('bookRoom') }}" method="POST">
-                    <input type="hidden" name="roomId" value="{{ person['id'] }}">
-                    <input type="submit" value="select">
-                </form>
-            </td>
-        </tr>
-        {% endif %}
-        {% endfor %}
-    </table>
-    <br><br>
-    <a href="{{ url_for('dashboard') }}"><button>Back to menu</button></a>
-</ul>
+            <tr>
+                <th>Room number</th>
+                <th>Capacity</th>
+                <th>Balcon</th>
+                <th>Price</th>
+                <th></th>
+            </tr>
+            {% for person in persons %}
+            {%if [person["capacity"]] == user%}
+            <tr>
+                <td>{{ person["room"] }}</td>
+                <td>{{ person["capacity"] }}</td>
+                <td>{{ person["balcon"] }}</td>
+                <td>${{ person["price"] }}</td>
+                <td>
+                    <form action="{{ url_for('bookRoom') }}" method="POST">
+                        <input type="hidden" name="roomId" value="{{ person['id'] }}">
+                        <input type="submit" value="select">
+                    </form>
+                </td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </table>
+        <br><br>
+        <a href="{{ url_for('dashboard') }}"><button>Back to menu</button></a>
+    </ul>
+</div>
+
+
 {%endblock custom_body%}

@@ -17,38 +17,44 @@
             padding: 6px;
             text-align: left;
         }
+
+        div.relative {
+            position: relative;
+            bottom: -150px;
+            right: -60px;
+        }
     </style>
 </head>
 
 <body>
 
-    <h2>Reservations</h2>
+    <div class="relative">
 
-    <table id="myTable" class="myTable" style="width:100%">
+        <h2>Reservations</h2>
 
-        <tr>
-            <th>Client</th>
-            <th>Event name</th>
-            <th>Date</th>
-            <th>number of people</th>
-        </tr>
+        <table id="myTable" class="myTable" style="width:85%">
 
-
-        {% for event in events %}
-        <tr>
-            <td>{{ event["user"] }}</td>
-            <td>{{ event["event_name"] }}</td>
-            <td>{{ event["date"] }}</td>
-            <td>{{ event["number_of_people"] }}</td>
-
-        </tr>
-
-        {% endfor %}
-    </table>
+            <tr>
+                <th>Client</th>
+                <th>Event name</th>
+                <th>Date</th>
+                <th>number of people</th>
+            </tr>
 
 
+            {% for event in events %}
+            <tr>
+                <td>{{ event["user"] }}</td>
+                <td>{{ event["event_name"] }}</td>
+                <td>{{ event["date"] }}</td>
+                <td>{{ event["number_of_people"] }}</td>
 
-    </table>
+            </tr>
+
+            {% endfor %}
+        </table>
+
+    </div>
 
 </body>
 {%endblock admin%}
