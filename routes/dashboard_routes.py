@@ -1,6 +1,9 @@
 from flask import Flask, render_template, redirect, request, url_for, flash, session
 import requests
 from logic.user_logic import UserLogic
+import datetime
+
+logic = UserLogic()
 
 
 class DashboardRoutes:
@@ -14,17 +17,6 @@ class DashboardRoutes:
         def adminDashboard():
             return render_template("adminDashboard.html")
 
-        @app.route("/loginMenu", methods=["GET", "POST"])
-        def loginMenu():
-            if request.method == "GET":
-                return render_template("loginMenu.html")
-            elif request.method == "POST":
-                user = request.form.getlist("logMenu")
-                if user == ["register"]:
-                    return render_template("register.html")
-                elif user == ["login"]:
-                    return render_template("login.html")
-
         @app.route("/clientMenu")
         def clientMenu():
             return render_template("clientMenu.html")
@@ -32,8 +24,6 @@ class DashboardRoutes:
         @app.route("/adminMenu")
         def adminMenu():
             return render_template("adminMenu.html")
-
-        logic = UserLogic()
 
         @app.route("/rooms", methods=["GET", "POST"])
         def rooms():
@@ -70,10 +60,35 @@ class DashboardRoutes:
                 userId = request.form["userId"]
                 roomId = request.form["roomId"]
 
-                # rooms = logic.getRoomsBooked()
-                # for x in rooms.items():
-                #    if checkin > x
-                logic.bookRoom(userId, roomId, checkin, checkout)
+                format = "%Y-%m-%dT%H:%M"
+                checkin = datetime.datetime.strptime(checkin, format)
+                checkout = datetime.datetime.strptime(checkout, format)
+
+                rooms = logic.roomsBooked()
+                roomId = int(roomId)
+                y = False
+                z = False
+
+                if checkout > checkin:
+                    if len(rooms) > 0:
+                        for x in rooms:
+                            if roomId is x["bookId"]:
+                                z = True
+                                if (checkout < x["checkin"]) or (
+                                    checkin > x["checkin"] and checkin > x["checkout"]
+                                ):
+                                    y = True
+                                else:
+                                    return render_template("error.html")
+                else:
+                    return render_template("error.html")
+
+                if z is False:
+                    logic.bookRoom(userId, roomId, checkin, checkout)
+
+                if y is True:
+                    logic.bookRoom(userId, roomId, checkin, checkout)
+
                 return render_template("dashboard.html")
 
         @app.route("/checkCapacity", methods=["GET", "POST"])
@@ -87,15 +102,13 @@ class DashboardRoutes:
         @app.route("/myReservations")
         def myReservations():
             userName = session["login_user"]
-            print(type(userName))
             roomsBooked = logic.getRoomsBooked()
-            # print(roomsBooked.checkout)
-            return render_template(
-                "myReservations.html", userName=userName, roomsBooked=roomsBooked
-            )
-            # else:
-            # poner alert que no hay recervaciones
-            # return render_template("dashboard.html")
+            if session["role"] == "client":
+                return render_template(
+                    "myReservations.html", userName=userName, roomsBooked=roomsBooked
+                )
+            elif session["role"] == "admin":
+                return render_template("allReservations.html", roomsBooked=roomsBooked)
 
         @app.route("/landingPage")
         def landingPage():
@@ -109,9 +122,34 @@ class DashboardRoutes:
                 user = request.form.getlist("checkCapacity")
                 return render_template("food.html")
 
-        @app.route("/foodTable")
-        def foodTable():
-            return render_template("foodTable.html")
+        @app.route("/bookEvent", methods=["GET", "POST"])
+        def bookEvent():
+            if request.method == "GET":
+                return render_template("bookEvent.html")
+            elif request.method == "POST":
+                user = session["login_user"]
+                eventName = request.form["eventName"]
+                date = request.form["date"]
+                quantity = request.form["quantity"]
+
+                format = "%Y-%m-%dT%H:%M"
+                date = datetime.datetime.strptime(date, format)
+
+                events = logic.getAllEvents()
+                y = True
+
+                if len(events) > 0:
+                    for x in events:
+                        if date == x["date"]:
+                            y = False
+                            return render_template("error.html")
+                else:
+                    logic.insertEvent(eventName, user, date, quantity)
+                    return render_template("dashboard.html")
+
+                if y is True:
+                    logic.insertEvent(eventName, user, date, quantity)
+                    return render_template("dashboard.html")
 
         @app.route("/instalaciones")
         def instalaciones():
@@ -123,6 +161,18 @@ class DashboardRoutes:
                 roomId = request.form["id"]
                 logic.deleteRoomBooked(roomId)
                 return render_template("dashboard.html")
+
+        @app.route("/eventTable")
+        def eventTable():
+            userName = session["login_user"]
+            role = session["role"]
+            events = logic.getAllEvents()
+            if role == "client":
+                return render_template(
+                    "eventTable.html", userName=userName, events=events
+                )
+            elif role == "admin":
+                return render_template("allEvents.html", events=events)
 
         @app.route("/logout")
         def logout():

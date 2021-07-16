@@ -1,17 +1,30 @@
 {%extends 'base.html'%}
 
 {% block custom_body%}
-<h1>Client Menu</h1>
 
-<label for="Reservations">My Reservations</label>
-<button><a id="Reservations" href="{{ url_for('myReservations') }}">Send</a></button>
-<br><br>
-<label for="reserve">Reserve a room</label>
-<button><a id="reserve" href="{{ url_for('checkCapacity') }}">Send</a></button>
-<br><br>
-<label for="food11">Order food</label>
-<button id="food11" onclick=displayFood()>Send</button>
-<br><br>
+<style>
+    div.relative {
+        position: relative;
+        bottom: -140px;
+        right: -100px;
+    }
+</style>
+
+
+<div class="relative">
+    <h1>Client Menu</h1>
+
+    <br>
+    <a href="{{ url_for('myReservations') }}"><button type="button" class="btn primary raised">My
+            Reservations</button></a>
+    <br><br>
+    <a href="{{ url_for('checkCapacity') }}"><button type="button" class="btn primary raised">Reserve a
+            room</button></a>
+    <br><br>
+    <a href="{{ url_for('bookEvent') }}"><button type="button" class="btn primary raised">Order food</button></a>
+</div>
+
+
 
 
 {%endblock custom_body%}

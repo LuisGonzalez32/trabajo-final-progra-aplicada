@@ -14,27 +14,16 @@
 
     <div name="linkers" class="topnav">
         <nav>
-            <a href="#" onclick="adminMenu()">Profile</a>
-            <a href="#" onclick="allReservations()">All Reservations</a>
-            <a href="#" onclick="food()">All orders</a>
-            <a href="#" onclick="logout()">Logout</a>|
+            <a href="{{ url_for('myReservations') }}">All Reservations</a>
+            <a href="{{ url_for('eventTable') }}">All events</a>
+            <a href="{{ url_for('logout') }}">logout</a>
         </nav>
     </div>
 
-    <div class="main">
+    <div>
+        {% block admin%}
 
-        <div style="display:none" id="loginMenu" name="pages" w3-include-html="{{url_for('loginMenu')}}"></div>
-        <div style="display:none" id="rooms" name="pages" w3-include-html="{{url_for('rooms')}}"></div>
-        <div style="display:none" id="logIn" name="pages" w3-include-html="{{url_for('logIn')}}"></div>
-        <div style="display:none" id="createAccount" name="pages" w3-include-html="{{url_for('createAccount')}}"></div>
-        <div style="display:none" id="dateBooking" name="pages" w3-include-html="{{url_for('dateBooking')}}"></div>
-        <div style="display:none" id="clientMenu" name="pages" w3-include-html="{{url_for('clientMenu')}}"></div>
-        <div style="display:block" id="adminMenu" name="pages" w3-include-html="{{url_for('adminMenu')}}"></div>
-        <div style="display:none" id="myReservations" name="pages" w3-include-html="{{url_for('myReservations')}}">
-        </div>
-        <div style="display:none" id="food" name="pages" w3-include-html="{{url_for('food')}}"></div>
-        <div style="display:none" id="foodTable" name="pages" w3-include-html="{{url_for('foodTable')}}"></div>
-
+        {%endblock admin%}
     </div>
 
     <div class="social-menu">

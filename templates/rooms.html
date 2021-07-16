@@ -21,13 +21,14 @@
 </style>
 
 <ul id="ul1">
-    <h2>Book a room (choose)</h2>
+    <h2>Choose a room </h2>
     <table>
 
         <tr>
-            <th>Name</th>
+            <th>Room number</th>
             <th>Capacity</th>
             <th>Balcon</th>
+            <th>Price</th>
             <th></th>
         </tr>
         {% for person in persons %}
@@ -36,6 +37,7 @@
             <td>{{ person["room"] }}</td>
             <td>{{ person["capacity"] }}</td>
             <td>{{ person["balcon"] }}</td>
+            <td>${{ person["price"] }}</td>
             <td>
                 <form action="{{ url_for('bookRoom') }}" method="POST">
                     <input type="hidden" name="roomId" value="{{ person['id'] }}">

@@ -2,13 +2,13 @@
 
 {% block custom_body%}
 
-<h1>Show a Date and Time Control</h1>
+<h1>Pick a date</h1>
 
 <form action="{{ url_for('dateBooking') }}" method="POST">
-    <label for="birthdaytime">Birthday (date and time):</label>
+    <label for="birthdaytime">Check in:</label>
     <input type="datetime-local" id="birthdaytime" name="checkin">
     <br><br>
-    <label for="birthdaytime">check out</label>
+    <label for="birthdaytime">Check out</label>
     <input type="datetime-local" id="birthdaytime" name="checkout">
 
     <input type="hidden" name="userId" value="{{userId}}">

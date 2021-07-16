@@ -1,0 +1,57 @@
+{%extends 'base.html'%}
+
+{% block custom_body%}
+
+<head>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        table,
+        th,
+        td {
+            border: 2px solid black;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 6px;
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Reservations</h2>
+
+    <table id="myTable" class="myTable" style="width:100%">
+
+        <tr>
+            <th>Client</th>
+            <th>Event name</th>
+            <th>Date</th>
+            <th>number of people</th>
+        </tr>
+
+
+        {% for event in events %}
+        {%if event["user"] == userName%}
+        <tr>
+            <td>{{ event["user"] }}</td>
+            <td>{{ event["event_name"] }}</td>
+            <td>{{ event["date"] }}</td>
+            <td>{{ event["number_of_people"] }}</td>
+
+        </tr>
+
+
+        {% endif %}
+        {% endfor %}
+    </table>
+
+
+
+    </table>
+
+</body>
+{%endblock custom_body%}

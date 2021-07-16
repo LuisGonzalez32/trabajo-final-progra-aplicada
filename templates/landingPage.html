@@ -25,7 +25,7 @@
         <div id="jumm" name="linkers" class="container">
             <a href="{{ url_for('loginMenu') }}">Login</a>
             <a href="#">Profile</a>
-            <a href="#" onclick="hideDivById('instalaciones')">instalaciones</a>
+            <a href="{{ url_for('instalaciones') }}">instalaciones</a>
             <a href="#">About us</a>
             <a href="#">Menu</a>
             <a href="#">Contact</a>
@@ -44,9 +44,6 @@
         </ul>
     </div>
 
-    <script src="https://www.w3schools.com/lib/w3.js"></script>
-    <script src="{{url_for('static', filename='preload.js')}}"></script>
-    <script src="{{url_for('static', filename='script.js')}}"></script>
 </body>
 
 </html>

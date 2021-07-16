@@ -15,14 +15,15 @@ class UserLogic(PybaLogic):
         rows = database.executeNonQueryRows(sql)
         return rows
 
-    def getRowByUser(self, user):
+    def insertEvent(self, eventName, client, date, numberOfPeople):
         database = self.createDatabaseObj()
-        sql = f"SELECT * FROM user where user_name like '{user}';"
-        result = database.executeQuery(sql)
-        if len(result) > 0:
-            return result[0]
-        else:
-            return []
+        sql = (
+            "INSERT INTO `hotel`.`event` "
+            + "(`id`,`event_name`,`user`,`date`,`number_of_people`) "
+            + f"VALUES(0,'{eventName}','{client}','{date}',{numberOfPeople});"
+        )
+        rows = database.executeNonQueryRows(sql)
+        return rows
 
     def bookRoom(self, userId, roomId, checkin, checkout):
         database = self.createDatabaseObj()
@@ -49,15 +50,21 @@ class UserLogic(PybaLogic):
         result = database.executeQuery(sql)
         return result
 
-    def getAllFood(self):
+    def getAllEvents(self):
         database = self.createDatabaseObj()
-        sql = "select * from hotel.food;"
+        sql = "select * from hotel.event;"
         result = database.executeQuery(sql)
         return result
 
     def getRoomsBooked(self):
         database = self.createDatabaseObj()
         sql = "select * from hotel.viewroomsbooked;"
+        result = database.executeQuery(sql)
+        return result
+
+    def roomsBooked(self):
+        database = self.createDatabaseObj()
+        sql = "select * from hotel.roomsbooked;"
         result = database.executeQuery(sql)
         return result
 
