@@ -1,6 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Coiny', cursive;
+        background: #34495e;
+    }
+
+    .container {
+        width: 300px;
+        padding: 40px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #191919;
+        text-align: center;
+        border-radius: 5px;
+        box-shadow: 0 50px 50px;
+    }
+
+    .container h1 {
+        color: white;
+        font-weight: 500;
+
+    }
+
+    .container input[type="text"],
+    .container input[type="password"] {
+        border: 0;
+        background: none;
+        display: block;
+        margin: 20px auto;
+        text-align: center;
+        border: 2px solid #3498db;
+        padding: 14px 10px;
+        width: 200px;
+        outline: none;
+        color: white;
+        font-size: 16px;
+        border-radius: 24px;
+        transition: 0.25s;
+    }
+
+    .container input[type="text"]:focus,
+    .container input[type="password"]:focus {
+        width: 280px;
+        border-color: #2ecc71;
+    }
+
+    .container input[type="submit"] {
+        border: 0;
+        background: none;
+        display: block;
+        margin: 20px auto;
+        text-align: center;
+        border: 2px solid #2ecc71;
+        padding: 14px 25px;
+        outline: none;
+        color: white;
+        border-radius: 24px;
+        transition: 0.25s;
+        font-size: 17px;
+        font-family: 'Libre Baskerville', serif;
+    }
+
+    .container a[type="text"]:hover {
+        background: #2ecc71;
+    }
+
+    .container a[type="text"] {
+        border: 0;
+        background: none;
+        display: block;
+        margin: 20px auto;
+        text-align: center;
+        border: 2px solid #2ecc71;
+        padding: 14px 25px;
+        outline: none;
+        color: white;
+        border-radius: 24px;
+        transition: 0.25s;
+        font-size: 17px;
+        font-family: 'Libre Baskerville', serif;
+    }
+
+    .container tutton[type="text"]:hover {
+        background: #2ecc71;
+    }
+</style>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,21 +101,13 @@
 </head>
 
 <body>
-    <h1>register</h1>
-    <p>this is register</p>
 
-    <form action="{{ url_for('register') }}" method="post">
-        <label for="user">user:</label><br>
-        <input type="text" name="user" id="user">
-        <br><br>
-        <label for="password">password:</label><br>
-        <input type="password" name="password" id="password">
-        <br><br>
-        <label for="confpassword">confirm password:</label><br>
-        <input type="password" name="confpassword" id="confpassword">
-        <br><br>
+    <form class="container" action="{{ url_for('register') }}" method="post">
+        <h1>Create account</h1>
+        <input type="text" name="user" placeholder="user">
+        <input type="password" name="password" placeholder="password">
+        <input type="password" name="confpassword" placeholder="confirm password">
         <div class="g-recaptcha" data-sitekey="6LeAdQcbAAAAAFhWhLVOYQz2RSawVM1brJY9j7ql"></div>
-        <br><br>
         <input type="submit" value="Register">
 
     </form>

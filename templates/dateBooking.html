@@ -2,18 +2,33 @@
 
 {% block custom_body%}
 
-<h1>Show a Date and Time Control</h1>
+<style>
+    div.relative {
+        position: relative;
+        bottom: -170px;
+        right: -100px;
+    }
+</style>
 
-<form action="{{ url_for('dateBooking') }}" method="POST">
-    <label for="birthdaytime">Birthday (date and time):</label>
-    <input type="datetime-local" id="birthdaytime" name="checkin">
-    <br><br>
-    <label for="birthdaytime">check out</label>
-    <input type="datetime-local" id="birthdaytime" name="checkout">
+<div class="relative">
 
-    <input type="hidden" name="userId" value="{{userId}}">
-    <input type="hidden" name="roomId" value="{{roomId}}">
-    <input type="submit">
-</form>
+    <h1>Pick a date</h1>
+    <br>
+    <form action="{{ url_for('dateBooking') }}" method="POST">
+        <label for="birthdaytime">Check in:</label>
+        <input type="datetime-local" name="checkin">
+        <br><br>
+        <label for="birthdaytime">Check out</label>
+        <input type="datetime-local" name="checkout">
+
+        <input type="hidden" name="userId" value="{{userId}}">
+        <input type="hidden" name="roomId" value="{{roomId}}">
+        <input type="submit">
+    </form>
+</div>
+
+
+
+
 
 {%endblock custom_body%}

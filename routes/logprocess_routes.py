@@ -14,7 +14,7 @@ class LogProcessRoutes:
                 logic = UserLogic()
                 username = request.form["user"]
                 password = request.form["password"]
-                userDict = logic.getRowByUser(username)
+                userDict = logic.getUser(username)
 
                 # validar si userDict no es vacio
                 if len(userDict) != 0:
@@ -27,7 +27,14 @@ class LogProcessRoutes:
                         # se valido la password, se puede crear sesion y pasar al dashboard
                         session["login_user"] = username
                         session["loggedIn"] = True
-                        return redirect("dashboard")
+
+                        if userDict["role"] == "client":
+                            session["role"] = "client"
+                            return redirect("dashboard")
+
+                        elif userDict["role"] == "admin":
+                            session["role"] = "admin"
+                            return redirect("adminDashboard")
                     else:
                         return redirect("login")
                 else:
@@ -35,3 +42,14 @@ class LogProcessRoutes:
                     return redirect("login")
 
                 return redirect("login")
+
+        @app.route("/loginMenu", methods=["GET", "POST"])
+        def loginMenu():
+            if request.method == "GET":
+                return render_template("loginMenu.html")
+            elif request.method == "POST":
+                user = request.form.getlist("logMenu")
+                if user == ["register"]:
+                    return render_template("register.html")
+                elif user == ["login"]:
+                    return render_template("login.html")
