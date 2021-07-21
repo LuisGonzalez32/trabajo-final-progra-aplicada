@@ -42,12 +42,10 @@ class DashboardRoutes:
             if request.method == "POST":
                 if "roomId" in request.form:
                     userName = session["login_user"]
-                    userDict = logic.getUser(userName)
                     roomId = request.form["roomId"]
-                    userId = userDict.get("id")
 
                     return render_template(
-                        "dateBooking.html", userId=userId, roomId=roomId
+                        "dateBooking.html", userName=userName, roomId=roomId
                     )
 
         @app.route("/dateBooking", methods=["GET", "POST"])
@@ -57,7 +55,7 @@ class DashboardRoutes:
             if request.method == "POST":
                 checkin = request.form["checkin"]
                 checkout = request.form["checkout"]
-                userId = request.form["userId"]
+                userName = request.form["userName"]
                 roomId = request.form["roomId"]
 
                 format = "%Y-%m-%dT%H:%M"
@@ -84,10 +82,10 @@ class DashboardRoutes:
                     return render_template("error.html")
 
                 if z is False:
-                    logic.bookRoom(userId, roomId, checkin, checkout)
+                    logic.bookRoom(userName, roomId, checkin, checkout)
 
                 if y is True:
-                    logic.bookRoom(userId, roomId, checkin, checkout)
+                    logic.bookRoom(userName, roomId, checkin, checkout)
 
                 return render_template("dashboard.html")
 
