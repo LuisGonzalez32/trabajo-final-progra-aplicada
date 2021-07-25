@@ -1,6 +1,5 @@
 import pymysql
 
-
 class PybaDatabase:
     def __init__(self):
         self.host = "us-cdbr-east-04.cleardb.com"

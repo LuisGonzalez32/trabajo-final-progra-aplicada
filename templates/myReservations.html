@@ -43,14 +43,14 @@
 
 
             {% for room in roomsBooked %}
-            {%if room["user_name"] == userName%}
+            {%if room["userName"] == userName%}
             <tr>
-                <td>{{ room["user_name"] }}</td>
-                <td>{{ room["room"] }}</td>
+                <td>{{ room["userName"] }}</td>
+                <td>{{ room["roomId"] }}</td>
                 <td>{{ room["checkin"] }}</td>
                 <td>{{ room["checkout"] }}</td>
                 <td>
-                    <form action="{{ url_for('deleteEvent') }}" method="POST">
+                    <form action="{{ url_for('deleteRoom') }}" method="POST">
                         <input type="hidden" name="id" value="{{ room['id'] }}">
                         <input type="submit" value="Delete">
                     </form>

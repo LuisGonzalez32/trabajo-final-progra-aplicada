@@ -28,8 +28,8 @@ class UserLogic(PybaLogic):
     def bookRoom(self, userName, roomId, checkin, checkout):
         database = self.createDatabaseObj()
         sql = (
-            "INSERT INTO `heroku_505461be12611e0`.`roomsBooked` "
-            + "(`id`,`userName`,`bookId`,`checkin`,`checkout`) "
+            "INSERT INTO `heroku_505461be12611e0`.`roomBooked` "
+            + "(`id`,`userName`,`roomId`,`checkin`,`checkout`) "
             + f"VALUES(0, '{userName}', {roomId}, '{checkin}', '{checkout}');"
         )
         rows = database.executeNonQueryRows(sql)
@@ -64,19 +64,19 @@ class UserLogic(PybaLogic):
 
     def roomsBooked(self):
         database = self.createDatabaseObj()
-        sql = "select * from heroku_505461be12611e0.roomsbooked;"
+        sql = "SELECT * FROM heroku_505461be12611e0.roomsbooked;"
         result = database.executeQuery(sql)
         return result
 
     def roomsBooked(self):
         database = self.createDatabaseObj()
-        sql = "select * from hotel.roomsbooked;"
+        sql = "select * from heroku_505461be12611e0.roombooked;"
         result = database.executeQuery(sql)
         return result
 
     def deleteRoomBooked(self, room):
         database = self.createDatabaseObj()
-        sql = f"Delete FROM heroku_505461be12611e0.roomsBooked where id = '{room}';"
+        sql = f"Delete FROM heroku_505461be12611e0.roomBooked where id = '{room}';"
         rows = database.executeNonQueryRows(sql)
         return rows
 
@@ -88,6 +88,6 @@ class UserLogic(PybaLogic):
 
     def deleteEvent(self, room):
         database = self.createDatabaseObj()
-        sql = f"Delete FROM hotel.event where id = '{room}';"
+        sql = f"Delete FROM heroku_505461be12611e0.event where id = '{room}';"
         rows = database.executeNonQueryRows(sql)
         return rows
