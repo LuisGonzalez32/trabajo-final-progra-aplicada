@@ -1,4 +1,7 @@
-Flask
-gunicorn
+
 flask-cors
-flask_restful 
+flask
+flask-restful
+PyMySQL
+bcrypt
+gunicorn
