@@ -2,6 +2,7 @@ from flask import render_template, request, redirect, session
 from logic.user_logic import UserLogic
 import bcrypt
 import datetime
+import requests
 
 logic = UserLogic()
 
@@ -26,9 +27,10 @@ class RoomRoutes:
                 if "roomId" in request.form:
                     userName = session["login_user"]
                     roomId = request.form["roomId"]
+                    roomPrice = request.form["roomPrice"]
 
                     return render_template(
-                        "dateBooking.html", userName=userName, roomId=roomId
+                        "dateBooking.html", userName=userName, roomId=roomId, roomPrice=roomPrice
                     )
 
         @app.route("/dateBooking", methods=["GET", "POST"])
@@ -40,9 +42,7 @@ class RoomRoutes:
                 checkout = request.form["checkout"]
                 userName = request.form["userName"]
                 roomId = request.form["roomId"]
-
-                print(userName)
-                print(roomId)
+                roomPrice = request.form["roomPrice"]
 
                 format = "%Y-%m-%dT%H:%M"
                 checkin = datetime.datetime.strptime(checkin, format)
@@ -69,9 +69,15 @@ class RoomRoutes:
 
                 if z is False:
                     logic.bookRoom(userName, roomId, checkin, checkout)
+                    print(roomPrice)
+                    tonto = roomPrice
+                    session["totalAmount"] = tonto
 
                 if y is True:
                     logic.bookRoom(userName, roomId, checkin, checkout)
+                    print(roomPrice)
+                    tonto = roomPrice
+                    session["totalAmount"] = tonto
 
                 return render_template("dashboard.html")
 
@@ -87,10 +93,33 @@ class RoomRoutes:
         def myReservations():
             userName = session["login_user"]
             roomsBooked = logic.roomsBooked()
-            print(session["role"])
             if session["role"] == "client":
                 return render_template(
                     "myReservations.html", userName=userName, roomsBooked=roomsBooked
                 )
             elif session["role"] == "admin":
                 return render_template("allReservations.html", roomsBooked=roomsBooked)
+
+        @app.route("/puto")
+        def puto():
+            restapi     = "https://credit-card-auth-api-cerberus.herokuapp.com"
+            endpoint    = "/verify"
+
+            url = f"{restapi}{endpoint}"
+
+            data = {
+                "name": "Erick Hernandez",
+                "number": "7000123456780000",
+                "date": "12/24",
+                "code": "182",
+                "balance": 20.25 # el valor de la transaccion
+            }
+
+            response = requests.post(url, data=data)
+            print(response)
+            if response.status_code == 200:
+                dataJson = response.json()
+                if dataJson['response'] == '00':
+                    return dataJson
+                else:
+                    return dataJson

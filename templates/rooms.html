@@ -47,6 +47,7 @@
                 <td>${{ person["price"] }}</td>
                 <td>
                     <form action="{{ url_for('bookRoom') }}" method="POST">
+                        <input type="hidden" name="roomPrice" value="{{ person['price'] }}">
                         <input type="hidden" name="roomId" value="{{ person['id'] }}">
                         <input type="submit" value="select">
                     </form>

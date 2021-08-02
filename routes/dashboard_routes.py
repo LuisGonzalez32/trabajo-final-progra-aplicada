@@ -5,7 +5,6 @@ import datetime
 
 logic = UserLogic()
 
-
 class DashboardRoutes:
     @staticmethod
     def configure_routes(app):
@@ -16,14 +15,6 @@ class DashboardRoutes:
         @app.route("/adminDashboard")
         def adminDashboard():
             return render_template("adminDashboard.html")
-
-        @app.route("/clientMenu")
-        def clientMenu():
-            return render_template("clientMenu.html")
-
-        @app.route("/adminMenu")
-        def adminMenu():
-            return render_template("adminMenu.html")
 
         @app.route("/landingPage")
         def landingPage():
@@ -40,6 +31,10 @@ class DashboardRoutes:
                 return redirect("login")
             else:
                 return redirect("login")
+        
+        @app.route("/clear")
+        def clear():
+            session.clear()
 
         if __name__ == "__main__":
             app.run(debug=True)
