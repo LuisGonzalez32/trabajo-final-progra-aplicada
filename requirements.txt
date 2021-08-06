@@ -6,3 +6,4 @@ bcrypt
 pytest
 gunicorn
 requests
+recaptcha
