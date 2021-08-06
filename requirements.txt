@@ -6,4 +6,3 @@ bcrypt
 pytest
 gunicorn
 requests
-jinja
