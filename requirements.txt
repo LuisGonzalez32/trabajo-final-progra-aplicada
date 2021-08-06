@@ -5,3 +5,5 @@ PyMySQL
 bcrypt
 pytest
 gunicorn
+requests
+jinja
