@@ -42,7 +42,7 @@ class RoomRoutes:
                 checkout = request.form["checkout"]
                 userName = request.form["userName"]
                 roomId = request.form["roomId"]
-                roomPrice = request.form["roomPrice"]
+                price = int(request.form["roomPrice"])
 
                 format = "%Y-%m-%dT%H:%M"
                 checkin = datetime.datetime.strptime(checkin, format)
@@ -68,18 +68,16 @@ class RoomRoutes:
                     return render_template("error.html")
 
                 if z is False:
-                    logic.bookRoom(userName, roomId, checkin, checkout)
-                    print(roomPrice)
-                    tonto = roomPrice
-                    session["totalAmount"] = tonto
+                    logic.bookRoom(userName, price, roomId, checkin, checkout)
+
 
                 if y is True:
-                    logic.bookRoom(userName, roomId, checkin, checkout)
-                    print(roomPrice)
-                    tonto = roomPrice
-                    session["totalAmount"] = tonto
+                    logic.bookRoom(userName, price, roomId, checkin, checkout)
 
-                return render_template("dashboard.html")
+
+                name = session["login_user"]
+                total = logic.getTotal(name)
+                return render_template("dashboard.html", total = total)
 
         @app.route("/checkCapacity", methods=["GET", "POST"])
         def checkCapacity():
@@ -99,6 +97,16 @@ class RoomRoutes:
                 )
             elif session["role"] == "admin":
                 return render_template("allReservations.html", roomsBooked=roomsBooked)
+
+        @app.route("/deleteRoom", methods=["POST"])
+        def deleteRoom():
+            if request.method == "POST":
+                roomId = request.form["id"]
+                logic.deleteRoomBooked(roomId)
+
+                name = session["login_user"]
+                total = logic.getTotal(name)
+                return render_template("dashboard.html", total = total)
 
         @app.route("/puto")
         def puto():

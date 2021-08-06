@@ -25,12 +25,12 @@ class UserLogic(PybaLogic):
         rows = database.executeNonQueryRows(sql)
         return rows
 
-    def bookRoom(self, userName, roomId, checkin, checkout):
+    def bookRoom(self, userName, price, roomId, checkin, checkout):
         database = self.createDatabaseObj()
         sql = (
             "INSERT INTO `heroku_505461be12611e0`.`roomBooked` "
-            + "(`id`,`userName`,`roomId`,`checkin`,`checkout`) "
-            + f"VALUES(0, '{userName}', {roomId}, '{checkin}', '{checkout}');"
+            + "(`id`,`userName`, `price`, `roomId`,`checkin`,`checkout`) "
+            + f"VALUES(0, '{userName}', {price}, {roomId}, '{checkin}', '{checkout}');"
         )
         rows = database.executeNonQueryRows(sql)
         return rows
@@ -43,6 +43,19 @@ class UserLogic(PybaLogic):
             return result[0]
         else:
             return []
+    
+    def getTotal(self, user):
+        database = self.createDatabaseObj()
+        sql = f"SELECT * FROM heroku_505461be12611e0.roomBooked where userName = '{user}';"
+        result = database.executeQuery(sql)
+        total = 0
+        if len(result) > 0:
+            for res in result:
+                total = total + res["price"]
+
+            return total
+        else:
+            return 0
 
     def getAllRooms(self):
         database = self.createDatabaseObj()

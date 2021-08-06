@@ -30,6 +30,9 @@ class LogProcessRoutes:
 
                         if userDict["role"] == "client":
                             session["role"] = "client"
+                            name = session["login_user"]
+                            total = logic.getTotal(name)
+                            return render_template("dashboard.html", total = total)
                             return redirect("dashboard")
 
                         elif userDict["role"] == "admin":

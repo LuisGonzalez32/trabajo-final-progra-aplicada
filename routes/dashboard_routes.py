@@ -10,7 +10,9 @@ class DashboardRoutes:
     def configure_routes(app):
         @app.route("/dashboard")
         def dashboard():
-            return render_template("dashboard.html")
+                name = session["login_user"]
+                total = logic.getTotal(name)
+                return render_template("dashboard.html", total = total)
 
         @app.route("/adminDashboard")
         def adminDashboard():

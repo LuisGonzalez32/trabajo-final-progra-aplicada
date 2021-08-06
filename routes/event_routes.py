@@ -32,25 +32,26 @@ class EventRoutes:
                             return render_template("error.html")
                 else:
                     logic.insertEvent(eventName, user, date, quantity)
-                    return render_template("dashboard.html")
+                    name = session["login_user"]
+                    total = logic.getTotal(name)
+                    return render_template("dashboard.html", total = total)
 
                 if y is True:
                     logic.insertEvent(eventName, user, date, quantity)
-                    return render_template("dashboard.html")
+                    name = session["login_user"]
+                    total = logic.getTotal(name)
+                    return render_template("dashboard.html", total = total)
 
-        @app.route("/deleteRoom", methods=["POST"])
-        def deleteRoom():
-            if request.method == "POST":
-                roomId = request.form["id"]
-                logic.deleteRoomBooked(roomId)
-                return render_template("dashboard.html")
+        
 
         @app.route("/deleteEvent", methods=["POST"])
         def deleteEvent():
             if request.method == "POST":
                 eventId = request.form["id"]
                 logic.deleteEvent(eventId)
-                return render_template("dashboard.html")
+                name = session["login_user"]
+                total = logic.getTotal(name)
+                return render_template("dashboard.html", total = total)
 
         @app.route("/eventTable")
         def eventTable():
