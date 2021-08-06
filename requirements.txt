@@ -7,7 +7,6 @@ pytest
 gunicorn
 requests
 recaptcha
-session
 django
 jinja2
 
