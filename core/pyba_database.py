@@ -4,9 +4,9 @@ class PybaDatabase:
     def __init__(self):
         self.host = "us-cdbr-east-04.cleardb.com"
         self.port = 3306
-        self.user = "b509a91b217bf2"
-        self.password = "c60f4b6e"
-        self.database = "heroku_505461be12611e0"
+        self.user = "b428b64d6b8d68"
+        self.password = "5cd8bc83"
+        self.database = "heroku_f01c3ac3ef5226b"
         self.connection = self.createConnection()
         self.cursor = self.createCursor()
 

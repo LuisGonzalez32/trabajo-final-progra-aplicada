@@ -1,0 +1,46 @@
+{%extends 'base.html'%}
+
+{% block custom_body%}
+
+<head>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        table,
+        th,
+        td {
+            border: 2px solid black;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 6px;
+            text-align: left;
+        }
+
+        div.relative {
+            position: relative;
+            bottom: -150px;
+            right: -60px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="relative">
+        <div>
+            <br>
+
+            <h1>Options</h1>
+            <br><br>
+            <a href="{{ url_for('cuadrimotosAdults') }}"><button type="button" class="btn primary raised">Adults</button></a>
+            <br><br>
+            <a href="{{ url_for('cuadrimotosKids') }}"><button type="button" class="btn primary raised">Kids</button></a>
+
+        </div>
+    </div>
+
+
+</body>
+{%endblock custom_body%}

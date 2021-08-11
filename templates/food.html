@@ -1,6 +1,6 @@
-{%extends 'adminDashboard.html'%}
+{%extends 'base.html'%}
 
-{% block admin%}
+{% block custom_body%}
 
 <head>
     <link rel="stylesheet" href="/static/style.css">
@@ -29,38 +29,28 @@
 <body>
 
     <div class="relative">
-        <h2>All reservations</h2>
+        <h2>Food</h2>
 
-        <table id="myTable" class="myTable" style="width:90%">
+        <table id="myTable" class="myTable" style="width:87%">
 
             <tr>
-                <th>Name</th>
-                <th>price</th>
-                <th>checkIn</th>
-                <th>checkout</th>
+                <th>Food</th>
+                <th>Country</th>
+                <th>Price</th>
             </tr>
 
 
-            {% for room in roomsBooked %}
+            {% for food in dataJson %}
             <tr>
-                <td>{{ room["userName"] }}</td>
-                <td>{{ room["price"] }}</td>
-                <td>{{ room["checkin"] }}</td>
-                <td>{{ room["checkout"] }}</td>
-
+                <td>{{ food["nombre"] }}</td>
+                <td>{{ food["pais"] }}</td>
+                <td>{{ food["precio"] }}</td>
+                
             </tr>
-
-
-
             {% endfor %}
-        </table>
-
-
-
         </table>
     </div>
 
 
-
 </body>
-{%endblock admin%}
+{%endblock custom_body%}

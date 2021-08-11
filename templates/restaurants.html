@@ -1,0 +1,62 @@
+{%extends 'base.html'%}
+
+{% block custom_body%}
+
+<head>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        table,
+        th,
+        td {
+            border: 2px solid black;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 6px;
+            text-align: left;
+        }
+
+        div.relative {
+            position: relative;
+            bottom: -150px;
+            right: -60px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="relative">
+        <h2>Restaurants nearby</h2>
+
+        <table id="myTable" class="myTable" style="width:66%">
+
+            <tr>
+                <th>Food</th>
+                <th>horario_inicio</th>
+                <th>horario_cierre</th>
+                <th>precio_promedio</th>
+                <th>distancia_hotel</th>
+                <th>calificacion_cliente</th>
+            </tr>
+
+
+            {% for food in dataJson %}
+            <tr>
+                <td>{{ food["nombre"] }}</td>
+                <td>{{ food["horario_inicio"] }}</td>
+                <td>{{ food["horario_cierre"] }}</td>
+                <td>{{ food["precio_promedio"] }}</td>
+                <td>{{ food["distancia_hotel"] }}</td>
+                <td>{{ food["calificacion_cliente"] }}</td>
+                
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+
+</body>
+{%endblock custom_body%}
