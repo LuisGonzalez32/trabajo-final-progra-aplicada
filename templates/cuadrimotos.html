@@ -1,0 +1,63 @@
+{%extends 'base.html'%}
+
+{% block custom_body%}
+
+<head>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        table,
+        th,
+        td {
+            border: 2px solid black;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 6px;
+            text-align: left;
+        }
+
+        div.relative {
+            position: relative;
+            bottom: -150px;
+            right: -60px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="relative">
+        <h2>Food</h2>
+
+        <table id="myTable" class="myTable" style="width:87%">
+
+            <tr>
+                <th>code</th>
+                <th>tamagno</th>
+                <th>price</th>
+                <th>opening hour</th>
+                <th>closing hour</th>
+            </tr>
+
+
+            {% for food in dataJson %}
+            {% if option == food["tamagno"]  %}
+            <tr>
+                <td>{{ food["codigo_cuadri"] }}</td>
+                <td>{{ food["tamagno"] }}</td>
+                <td>{{ food["precio"] }}</td>
+                <td>{{ food["horario_abre"] }}</td>
+                <td>{{ food["horario_cierre"] }}</td>
+
+                
+            </tr>
+            {%endif%}
+            {% endfor %}
+        </table>
+    </div>
+
+
+</body>
+{%endblock custom_body%}

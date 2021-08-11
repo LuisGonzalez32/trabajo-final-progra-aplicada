@@ -2,8 +2,21 @@
 
 {% block custom_body%}
 
-<h1>ERROR</h1>
+<style>
+    div.body {
+        position: relative;
+        bottom: -130px;
+        right: -100px;
+    }
+</style>
 
-<button><a href="{{ url_for('dashboard') }}">Return to dashboard</a></button>
+
+<div class="body">
+    <h1>ERROR</h1>
+
+    <button><a href="{{ url_for('dashboard') }}">Return to dashboard</a></button>
+</div>
+
+
 
 {%endblock custom_body%}

@@ -567,6 +567,18 @@
                     <a href="{{ url_for('eventTable') }}"><span class="las la-history"></span>
                         <span>My events</span></a>
                 </li>
+                <li>
+                    <a href="{{ url_for('food') }}"><span class="las la-user"></span>
+                        <span>Our menu</span></a>
+                </li>
+                <li>
+                    <a href="{{ url_for('opcionesCuadrimotos') }}"><span class="las la-user-injured"></span>
+                        <span>Quad bike rent</span></a>
+                </li>
+                <li>
+                    <a href="{{ url_for('restaurants') }}"><span class="las la-history"></span>
+                        <span>Nearby restaurants</span></a>
+                </li>
             </ul>
         </div>
     </div>
@@ -586,7 +598,10 @@
                 </form>
             </div>
             <div class="user-wrapper">
-
+                <div>
+                    <a href="{{ url_for('checkout') }}"><button type="button" class="btn primary raised">Checkout</button></a>
+                </div>
+                <br><br><br>
                 <div>
                     <a href="{{ url_for('logout') }}"><button type="button" class="btn primary raised">Cerrar
                             Sesion</button></a>
